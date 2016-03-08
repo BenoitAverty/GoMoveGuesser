@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev # Activate spring dev profile
+  data:
+    mongodb:
+      database: gomoveguesser
+      port: 27017
+server: 
+  port: 8080
+logging:
+  level:
+    org.hibernate: DEBUG
+    org.springframework: INFO
+    com.mysmartfridge: DEBUG
