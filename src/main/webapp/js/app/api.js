@@ -26,7 +26,7 @@ function apiGetGame() {
   });
 }
 
-function apiSubscribeWebsocket() {
+function apiSubscribeWebsocket(moveReceivedCallback) {
   var stompClient = null;
 
   function connect() {
@@ -34,22 +34,8 @@ function apiSubscribeWebsocket() {
       stompClient = Stomp.over(socket);
       stompClient.connect({}, function(frame) {
           console.log('<>Connected: ' + frame);
-          stompClient.subscribe('/topic/moves', function(message) {
-              var move = JSON.parse(message.body);
-              addMove(new JGO.Coordinate(move.x, move.y));
-          });
+          stompClient.subscribe('/topic/moves', moveReceivedCallback);
       });
-  }
-
-  function disconnect() {
-      if (stompClient != null) {
-          stompClient.disconnect();
-      }
-      console.log("Disconnected");
-  }
-
-  function sendName() {
-      stompClient.send("/api/ws/hello", {}, JSON.stringify({}));
   }
 
   connect();
