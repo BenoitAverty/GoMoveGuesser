@@ -15,5 +15,5 @@ public class Move {
 	
 	/** Player who played the move **/
 	@Getter
-	private final Player p;
+	private final Player player;
 }

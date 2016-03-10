@@ -1,6 +1,7 @@
 package fr.ab0.gomoveguesser.domain.game;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,14 +12,16 @@ public class Game extends Entity {
 	
 	private List<Move> moves;
 	
-	private Player turn;
-	
-	public Game() {
-		turn = Player.BLACK;
+	public void addMove(int x, int y) {
+		Move m = new Move(x, y, getTurn());
+		moves.add(m);
 	}
 	
-	public void addMove(int x, int y) {
-		Move m = new Move(x, y, turn);
-		moves.add(m);
+	public List<Move> getMoves() {
+		return moves.stream().collect(Collectors.toList());
+	}
+	
+	public Player getTurn() {
+		return (moves.size()%2 == 0) ? Player.BLACK : Player.WHITE;
 	}
 }
