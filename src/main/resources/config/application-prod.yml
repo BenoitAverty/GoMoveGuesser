@@ -1,6 +1,6 @@
 spring:
-  #autoconfigure:
-   # exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
   profiles:
     active: prod
   data:
@@ -9,15 +9,15 @@ spring:
       host: localhost
       port: 27017
 server:
-  port: 8085
+  port: 9090
   address: 127.0.0.1 # Bind only to localhost in production to restrict access via apache frontend
 logging:
   file: log/mysmartfridge.log # Log to file in prod environment.
   level:
     org.hibernate: ERROR
     org.springframework: INFO
-    com.baverty: INFO
+    fr.ab0: DEBUG
 # Spring actuator should be bound to a different port in production (restricted port)
 management: 
-  port: 8086
+  port: 9091
   address: 127.0.0.1

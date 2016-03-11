@@ -28,6 +28,9 @@ public class GuessController {
 		catch(WrongPasswordException e) {
 			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
 		}
+		catch(IllegalArgumentException e) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
 		
 		return ResponseEntity.ok().build();
 	}

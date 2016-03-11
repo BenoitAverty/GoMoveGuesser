@@ -1,6 +1,7 @@
 package fr.ab0.gomoveguesser.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import fr.ab0.gomoveguesser.application.dto.GuessDto;
@@ -13,11 +14,16 @@ public class GuessApplication {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private SimpMessagingTemplate simpMessagingTemplate;
+	
+	
 	public void submitGuess(GuessDto guess) {
-		User user = userRepository.findByUsername(guess.pseudonym);
+		
+		User user = userRepository.findByUsernameIgnoreCase(guess.username);
 		
 		if(user == null) {
-			user = new User(guess.pseudonym, guess.password);
+			user = new User(guess.username, guess.password);
 		}
 		
 		if(!user.getPassword().equals(guess.password)) {
@@ -26,5 +32,7 @@ public class GuessApplication {
 		
 		user.addGuess(guess.x, guess.y);
 		userRepository.save(user);
+		
+		simpMessagingTemplate.convertAndSend("/topic/guesses", "");
 	}
 }
