@@ -8,9 +8,7 @@ public class MoveDto {
 	public MoveDto(Move m) {
 		x = m.getX();
 		y = m.getY();
-		password = null;
 	}
 	public int y;
 	public int x;
-	public String password;
 }

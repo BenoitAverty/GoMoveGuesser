@@ -91,7 +91,22 @@
 
           if(guess.success) {
             curUserGuess = coord;
-            apiSubmitGuess(coord, document.getElementById('form_username').value, document.getElementById('form_password').value);
+            apiSubmitGuess(coord, document.getElementById('form_username').value, document.getElementById('form_password').value)
+            .then(function(response) {
+              document.getElementById('form_username').style.border='';
+              document.getElementById('form_password').style.border='';
+            })
+            .catch(function(response) {
+              if(response.status == 400) {
+                document.getElementById('form_username').style.border='2px solid red';
+                document.getElementById('form_password').style.border='2px solid red';
+                alert("Couldn't submit your guess. Don't forget to choose a username and password below the board.");
+              }
+              if(response.status == 401) {
+                document.getElementById('form_password').style.border='2px solid red';
+                alert("Couldn't submit your guess. The password for this user is incorrect. Submit the propoer password or choose another name.");
+              }
+            });
           }
           else {
             alert('Illegal move: ' + guess.errorMsg);

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.ab0.gomoveguesser.application.GameApplication;
 import fr.ab0.gomoveguesser.application.dto.GameDto;
-import fr.ab0.gomoveguesser.application.dto.MoveDto;
+import fr.ab0.gomoveguesser.rest.dto.PostMoveDto;
 
 @RestController
 @RequestMapping("/api/games")
@@ -33,13 +33,13 @@ public class GameController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/moves")
-	public ResponseEntity<Void> postMove(@RequestBody MoveDto m) {
+	public ResponseEntity<Void> postMove(@RequestBody PostMoveDto m) {
 		if(m.password==null || ! m.password.equals(password)) {
 			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
 		}
 		m.password = null;
 		
-		gameApplication.addMoveToGame(m);
+		m.moves.stream().forEach(gameApplication::addMoveToGame);
 		
 		return ResponseEntity.ok().build();
 	}

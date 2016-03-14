@@ -8,8 +8,25 @@ function apiSubmitMove(coord, password) {
       method:'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        x: coord.i,
-        y: coord.j,
+        moves: [
+          { x: coord.i, y: coord.j }
+        ],
+        password: password
+      })
+
+  })
+  .then(function(response) {
+    if(!response.ok) throw response;
+    else return response;
+  });
+}
+
+function apiSubmitMoves(coordList, password) {
+  return fetch('/api/games/moves', {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        moves: coordList,
         password: password
       })
 
