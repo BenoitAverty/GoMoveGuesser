@@ -55,14 +55,14 @@
 
       var curMark = 'A';
       guessesList = document.getElementById("guesses");
-      guessesList.innerHTML = '';
+      //guessesList.innerHTML = '';
       for (var key in guesses) {
         if (guesses.hasOwnProperty(key)) {
           jboard.setMark(guesses[key].coord, curMark);
           var li = document.createElement("li");
           li.innerHTML = curMark + " : <strong>" + guesses[key].number + "</strong> people guessed this";
           if(curUserGuess && guesses[key].coord.equals(curUserGuess)) li.innerHTML = li.innerHTML + " <-- This is your current guess.";
-          guessesList.appendChild(li);
+          //guessesList.appendChild(li);
           curMark = String.fromCharCode(curMark.charCodeAt() + 1);
         }
       }

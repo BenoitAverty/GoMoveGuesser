@@ -11,31 +11,9 @@
   </style>
 </head>
 <body>
-  <div id="board-container">
-    <h1>It's <span class="playerturn">black</span>'s turn. Can you guess the next move ?</h1>
-    <ul>
-      <li>Click on the board where you think <span class="playerturn">black</span> will play.</li>
-      <li>You can change your guess at any time before the move is actually played. Don't cheat...</li>
-      <li>The less people to agree with you, the more points you win if you're right!</li>
-    </ul>
-    <div id="board"></div>
-    <form>
-      <input id="form_username" type="text" placeholder="Pseudonym" /><input id="form_password" type="password" placeholder="password" />
-    </form>
-  </div>
-  <div id="users-container">
+  <div id="app"></div>
 
-    <h2>Guesses for next move</h2>
-    <ul id="guesses">
-
-    </ul>
-
-    <h2>Scores</h2>
-    <ul id="players">
-
-    </ul>
-  </div>
-
+  <script type="text/javascript" src="app/gomoveguesser.dist.js"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/sockjs/1.0.3/sockjs.min.js"></script>
   <script type="text/javascript" src="js/vendor/stomp.js"></script>
   <script type="text/javascript" src="js/vendor/jgoboard-latest.js"></script>
