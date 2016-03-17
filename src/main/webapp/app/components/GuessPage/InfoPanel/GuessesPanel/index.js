@@ -1,52 +1,50 @@
 import React from 'react';
 import convertToJson from 'fetch-to-json';
 
+import { connect } from 'react-redux';
+
 class GuessesPanel extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      guesses: []
-    }
-    this.getGuesses();
-  }
-
-  getGuesses() {
-    let guesses = [];
-    return fetch('/api/users', {
-      method: 'GET',
-      headers: {accept: 'application/json'}
+  _computeGuessesList() {
+    let guesses = {};
+    this.props.users.other
+    .concat({
+      guess: this.props.users.current.guess
     })
-    .then(convertToJson)
-    .then(function(body) {
-      body.forEach(function(user) {
-        if(user.lastGuess != null) {
-          var hash = user.lastGuess.x * 19 + user.lastGuess.y;
-
-          if(hash in guesses) {
-            (guesses[hash].number)++
-          }
-          else {
-            guesses[hash] = {
-              number: 1,
-              coord: new JGO.Coordinate(user.lastGuess.x, user.lastGuess.y)
-            }
-          }
+    .filter(u => (typeof u.guess !== 'undefined' && u.guess !== null))
+    .forEach(u => {
+      let guessHash = u.guess.i*19 + u.guess.j;
+      if(guessHash in guesses) {
+        guesses[guessHash].number++;
+      }
+      else {
+        guesses[guessHash] = {
+          coord: {i: u.guess.i, j: u.guess.j},
+          number: 1
         }
-      });
+      }
     });
+
+    let curMark = 'A';
+    let list = [];
+    for(var hash in guesses) {
+      list.push(<li key={hash}>{curMark + " : " + guesses[hash].number + " people have guessed this."}</li>)
+    }
+
+    return list;
   }
 
   render() {
+
     return (
       <div className="guesses-panel">
         <h2>Guesses for next move</h2>
         <ul id="guesses">
-          {this.state.guesses}
+          {this._computeGuessesList()}
         </ul>
       </div>
     );
   }
 }
 
-export default GuessesPanel;
+export default connect(state => state)(GuessesPanel);

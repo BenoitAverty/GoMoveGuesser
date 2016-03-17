@@ -171,9 +171,9 @@
 
   apiGetGame()
   .then(function(game) {
-    game.moves.forEach(function(move) {
-      addMove(new JGO.Coordinate(move.x, move.y))
-    });
+    //game.moves.forEach(function(move) {
+      //addMove(new JGO.Coordinate(move.x, move.y))
+    //});
   })
   .then(retrieveUserInfo)
   .then(wsConnect)

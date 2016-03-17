@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import GuessesPanel from './GuessesPanel';
 import ScoresPanel from './ScoresPanel';
 
@@ -14,4 +16,4 @@ class InfoPanel extends React.Component {
   }
 }
 
-export default InfoPanel;
+export default connect(state=>state)(InfoPanel);
