@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 
 //components
 import Board from './Board';
+import LoginForm from './LoginForm';
 
 class BoardPanel extends React.Component {
 
   render() {
-    let playerTurn = (this.props.game.playerTurn == 'BLACK') ? 'black' : 'white';
+    const playerTurn = (this.props.playerTurn == 'BLACK') ? 'black' : 'white';
 
     return (
       <div id="board-container">
@@ -18,13 +19,17 @@ class BoardPanel extends React.Component {
           <li>You can change your guess at any time before the move is actually played. Don't cheat...</li>
           <li>The less people to agree with you, the more points you win if you're right!</li>
         </ul>
-        <Board moves='{this.props.game.moves}' />
-        <form>
-          <input id="form_username" type="text" placeholder="Pseudonym" /><input id="form_password" type="password" placeholder="password" />
-        </form>
+        <Board />
+        <LoginForm />
       </div>
     );
   }
 }
 
-export default connect(state => state)(BoardPanel);
+const mapStateToProps = (state) => {
+  return {
+      playerTurn: state.game.playerTurn
+  };
+};
+
+export default connect(mapStateToProps)(BoardPanel);

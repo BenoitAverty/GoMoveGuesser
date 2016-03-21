@@ -30,7 +30,7 @@ public class GuessApplication {
 			throw new WrongPasswordException();
 		}
 		
-		user.addGuess(guess.x, guess.y);
+		user.addGuess(guess.i, guess.j);
 		userRepository.save(user);
 		
 		simpMessagingTemplate.convertAndSend("/topic/guesses", "");

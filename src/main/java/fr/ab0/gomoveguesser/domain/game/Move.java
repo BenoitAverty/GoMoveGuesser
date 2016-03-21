@@ -8,10 +8,10 @@ public class Move {
 	
 	/** column where the move was played **/
 	@Getter
-	private final int x;
+	private final int i;
 	/** row where the move was played **/
 	@Getter
-	private final int y;
+	private final int j;
 	
 	/** Player who played the move **/
 	@Getter

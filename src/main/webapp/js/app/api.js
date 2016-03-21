@@ -9,7 +9,7 @@ function apiSubmitMove(coord, password) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         moves: [
-          { x: coord.i, y: coord.j }
+          { i: coord.i, j: coord.j }
         ],
         password: password
       })
@@ -42,8 +42,8 @@ function apiSubmitGuess(coord, username, password) {
       method:'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        x: coord.i,
-        y: coord.j,
+        i: coord.i,
+        j: coord.j,
         username: username,
         password: password
       })

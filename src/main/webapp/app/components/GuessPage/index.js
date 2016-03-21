@@ -1,17 +1,10 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-
 //components
 import BoardPanel from './BoardPanel';
 import InfoPanel from './InfoPanel';
 
 class GuessPage extends React.Component {
-
-  constructor() {
-    super();
-    this.state = ({users: [], game: {}});
-  }
 
   render() {
 
@@ -24,8 +17,4 @@ class GuessPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state;
-}
-
-export default connect(mapStateToProps)(GuessPage);
+export default GuessPage;

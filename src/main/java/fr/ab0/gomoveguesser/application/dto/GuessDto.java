@@ -8,13 +8,13 @@ public class GuessDto {
 	
 	public GuessDto(Guess guess) {
 		if(guess != null) {
-			this.x = guess.getX();
-			this.y = guess.getY();	
+			this.i = guess.getX();
+			this.j = guess.getY();	
 		}
 	}
 	
-	public int x;
-	public int y;
+	public int i;
+	public int j;
 	public String username;
 	public String password;
 }

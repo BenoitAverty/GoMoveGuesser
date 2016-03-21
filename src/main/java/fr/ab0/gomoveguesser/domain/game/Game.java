@@ -12,8 +12,8 @@ public class Game extends Entity {
 	
 	private List<Move> moves;
 	
-	public void addMove(int x, int y) {
-		Move m = new Move(x, y, getTurn());
+	public void addMove(int i, int j) {
+		Move m = new Move(i, j, getTurn());
 		moves.add(m);
 	}
 	

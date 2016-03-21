@@ -3,23 +3,20 @@ import convertToJson from 'fetch-to-json';
 
 import { connect } from 'react-redux';
 
+import nextChar from '../../../../utils/nextChar';
+
 class GuessesPanel extends React.Component {
 
   _computeGuessesList() {
     let guesses = {};
-    this.props.users.other
-    .concat({
-      guess: this.props.users.current.guess
-    })
-    .filter(u => (typeof u.guess !== 'undefined' && u.guess !== null))
-    .forEach(u => {
-      let guessHash = u.guess.i*19 + u.guess.j;
+    this.props.guesses.forEach(g => {
+      let guessHash = g.i*19 + g.j;
       if(guessHash in guesses) {
         guesses[guessHash].number++;
       }
       else {
         guesses[guessHash] = {
-          coord: {i: u.guess.i, j: u.guess.j},
+          coord: {i: g.i, j: g.j},
           number: 1
         }
       }
@@ -28,7 +25,8 @@ class GuessesPanel extends React.Component {
     let curMark = 'A';
     let list = [];
     for(var hash in guesses) {
-      list.push(<li key={hash}>{curMark + " : " + guesses[hash].number + " people have guessed this."}</li>)
+      list.push(<li key={hash}>{curMark + " : " + guesses[hash].number + " people have guessed this."}</li>);
+      curMark = nextChar(curMark);
     }
 
     return list;
@@ -47,4 +45,13 @@ class GuessesPanel extends React.Component {
   }
 }
 
-export default connect(state => state)(GuessesPanel);
+const mapStateToProps = (state) => {
+    return {
+      guesses: state.users.other
+        .map((u) => u.guess)
+        .concat(state.users.current.guess)
+        .filter(g => {return g != null})
+    }
+}
+
+export default connect(mapStateToProps)(GuessesPanel);

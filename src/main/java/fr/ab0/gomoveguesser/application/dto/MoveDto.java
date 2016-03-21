@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MoveDto {
 	public MoveDto(Move m) {
-		x = m.getX();
-		y = m.getY();
+		i = m.getI();
+		j = m.getJ();
 	}
-	public int y;
-	public int x;
+	public int i;
+	public int j;
 }

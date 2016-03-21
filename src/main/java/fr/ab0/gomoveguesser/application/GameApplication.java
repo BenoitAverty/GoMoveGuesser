@@ -29,11 +29,11 @@ public class GameApplication {
 	public void addMoveToGame(MoveDto move) {
 		Game g = gameRepository.findAll().iterator().next();
 		
-		g.addMove(move.x, move.y);
+		g.addMove(move.i, move.j);
 		
 		gameRepository.save(g);
 		
-		scoreCalculator.adjustScores(move.x, move.y);
+		scoreCalculator.adjustScores(move.i, move.j);
 		
 		template.convertAndSend("/topic/moves", move);
 	}

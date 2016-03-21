@@ -124,7 +124,7 @@
 
         var opponent = (player == JGO.BLACK) ? JGO.WHITE : JGO.BLACK;
 
-        sgfMovesList.push({x: lastMoveSgfCoord.i, y: lastMoveSgfCoord.j});
+        sgfMovesList.push({i: lastMoveSgfCoord.i, j: lastMoveSgfCoord.j});
 
         jboard.setType(lastMoveSgfCoord, player); // play stone
         jboard.setType(lastPlay.captures, JGO.CLEAR); // clear opponent's stones
@@ -171,7 +171,7 @@
   apiGetGame().then(function(game) {
     game.moves.forEach(function(move) {
 
-      var moveCoord = new JGO.Coordinate(move.x, move.y);
+      var moveCoord = new JGO.Coordinate(move.i, move.j);
       lastPlay = jboard.playMove(moveCoord, player, ko);
 
       if(lastPlay.success) {

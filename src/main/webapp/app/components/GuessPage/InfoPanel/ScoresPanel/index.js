@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-
 class ScoresPanel extends React.Component {
   render() {
     return (
@@ -15,4 +13,4 @@ class ScoresPanel extends React.Component {
   }
 }
 
-export default connect(state=>state)(ScoresPanel);
+export default ScoresPanel;
